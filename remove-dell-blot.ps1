@@ -14,7 +14,7 @@ function Test-IsAdmin {
 
 if (-not (Test-IsAdmin)) {
     Write-Host "Desenvolvido por Gabriel Yan - gabrielyandev.com.br" -ForegroundColor Green
-    Write-Warning "Este script deve ser executado como Administrador para desinstalações confiáveis."
+    Write-Warning "Este script deve ser executado como Administrador para desinstalações confiaveis."
 }
 
 function Get-UninstallEntries {
@@ -63,7 +63,7 @@ function Invoke-Uninstall {
 
     $matches = Get-UninstallEntries -DisplayNamePattern $AppName
     if (-not $matches) {
-        Write-Host "$AppName não está instalado neste computador" -ForegroundColor Yellow
+        Write-Host "$AppName nao esta instalado neste computador" -ForegroundColor Yellow
         return
     }
 
@@ -119,12 +119,12 @@ function Remove-AppxPackageEverywhere {
     Write-Host "Procurando Appx: $AppName" -ForegroundColor Cyan
     $apps = Get-AppxPackage -AllUsers | Where-Object { $_.Name -eq $AppName -or $_.PackageFamilyName -eq $AppName }
     if (-not $apps) { 
-        Write-Host "$AppName não está instalado neste computador" -ForegroundColor Yellow
+        Write-Host "$AppName nao esta instalado neste computador" -ForegroundColor Yellow
         return
     }
     
     foreach ($p in $apps) {
-        if ($PSCmdlet.ShouldProcess($p.Name, "Remover Appx para todos os usuários")) {
+        if ($PSCmdlet.ShouldProcess($p.Name, "Remover Appx para todos os usuarios")) {
             Write-Host "Removendo Appx: $($p.Name)" -ForegroundColor Green
             Remove-AppxPackage -Package $p.PackageFullName -AllUsers -ErrorAction SilentlyContinue
         }
@@ -144,11 +144,11 @@ function Show-UninstallString {
     param([Parameter(Mandatory)][string]$AppName)
     $matches = Get-UninstallEntries -DisplayNamePattern $AppName
     if ($matches) { 
-        Write-Host "Entradas de desinstalação encontradas para '$AppName':" -ForegroundColor Cyan
+        Write-Host "Entradas de desinstalacao encontradas para '$AppName':" -ForegroundColor Cyan
         $matches | Select-Object DisplayName, UninstallString | Format-Table -AutoSize 
     }
     else { 
-        Write-Host "$AppName não está instalado neste computador" -ForegroundColor Yellow 
+        Write-Host "$AppName nao esta instalado neste computador" -ForegroundColor Yellow 
     }
 }
 
@@ -156,21 +156,21 @@ function Show-UninstallString {
 # Execução principal
 # ---------------------------
 
-Write-Host "Iniciando remoção de aplicativos Dell e Windows desnecessários..." -ForegroundColor Yellow
+Write-Host "Iniciando remocao de aplicativos Dell e Windows desnecessarios..." -ForegroundColor Yellow
 Write-Host "Execute com -WhatIf primeiro para testar!" -ForegroundColor Magenta
 Write-Host ""
 
-# Perguntar se o usuário quer fazer um teste primeiro
+# Perguntar se o usuario quer fazer um teste primeiro
 $testFirst = Read-Host "Deseja executar em modo de teste (WhatIf) primeiro? (S/N)"
 $whatIfParam = @{}
 if ($testFirst -eq 'S' -or $testFirst -eq 's') {
     $whatIfParam.WhatIf = $true
-    Write-Host "`n=== MODO DE TESTE - Nada será realmente desinstalado ===" -ForegroundColor Magenta
+    Write-Host "`n=== MODO DE TESTE - Nada sera realmente desinstalado ===" -ForegroundColor Magenta
 } else {
-    Write-Host "`n=== MODO DE EXECUÇÃO - Aplicativos serão desinstalados ===" -ForegroundColor Red
+    Write-Host "`n=== MODO DE EXECUCAO - Aplicativos serao desinstalados ===" -ForegroundColor Red
     $confirm = Read-Host "Tem certeza que deseja continuar? (S/N)"
     if ($confirm -ne 'S' -and $confirm -ne 's') {
-        Write-Host "Operação cancelada pelo usuário." -ForegroundColor Yellow
+        Write-Host "Operacao cancelada pelo usuario." -ForegroundColor Yellow
         exit
     }
 }
@@ -188,7 +188,7 @@ Invoke-Uninstall -AppName 'Dell Core Services' -NoRestart @whatIfParam
 Invoke-Uninstall -AppName 'Dell Trusted Device Agent' -NoRestart @whatIfParam
 Invoke-Uninstall -AppName 'Dell Optimizer' -NoRestart @whatIfParam
 
-Write-Host "`n=== REMOVENDO APLICATIVOS WINDOWS DESNECESSÁRIOS ===" -ForegroundColor Yellow
+Write-Host "`n=== REMOVENDO APLICATIVOS WINDOWS DESNECESSARIOS ===" -ForegroundColor Yellow
 
 Remove-AppxPackageEverywhere 'Microsoft.GamingApp' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.MicrosoftOfficeHub' @whatIfParam
@@ -208,7 +208,7 @@ Remove-AppxPackageEverywhere 'ZuneMusic' @whatIfParam
 Write-Host "`n=== VERIFICANDO ENTRADAS DELLOSD ===" -ForegroundColor Yellow
 Show-UninstallString 'DELLOSD'
 
-Write-Host "`nProcesso concluído!" -ForegroundColor Green
+Write-Host "`nProcesso concluido!" -ForegroundColor Green
 if ($whatIfParam.WhatIf) {
     Write-Host "Este foi um teste. Execute o script novamente e escolha 'N' para realmente desinstalar os aplicativos." -ForegroundColor Magenta
 }
