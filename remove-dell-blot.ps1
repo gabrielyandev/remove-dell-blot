@@ -1,7 +1,6 @@
-#Requires -RunAsAdministrator
+Set-ExecutionPolicy Bypass -Scope Process -Force
 
-# permitir execução temporária de scripts
-Set-ExecutionPolicy Bypass -Scope Process
+#Requires -RunAsAdministrator
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
@@ -256,7 +255,7 @@ Show-UninstallString 'DELLOSD'
 Write-Host "`n=== VERIFICANDO ENTRADAS DE MCAPPEE ===" -ForegroundColor Yellow
 Show-UninstallString 'McAfee'
 
-Write-Host "`nProcesso concluído!" -ForegroundColor Green
+Write-Host "`nProcesso concluido!" -ForegroundColor Green
 if ($whatIfParam.WhatIf) {
     Write-Host "Este foi um teste. Execute o script novamente e escolha 'N' para realmente desinstalar os aplicativos." -ForegroundColor Magenta
 }
