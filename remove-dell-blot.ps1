@@ -167,7 +167,7 @@ if ($testFirst -eq 'S' -or $testFirst -eq 's') {
     $whatIfParam.WhatIf = $true
     Write-Host "`n=== MODO DE TESTE - Nada sera realmente desinstalado ===" -ForegroundColor Magenta
 } else {
-    Write-Host "`n=== MODO DE EXECUCAO - Aplicativos serao desinstalados ===" -ForegroundColor Red
+    Write-Host "`n=== MODO DE EXECUÇÃO - Aplicativos serao desinstalados ===" -ForegroundColor Red
     $confirm = Read-Host "Tem certeza que deseja continuar? (S/N)"
     if ($confirm -ne 'S' -and $confirm -ne 's') {
         Write-Host "Operacao cancelada pelo usuario." -ForegroundColor Yellow
@@ -190,25 +190,79 @@ Invoke-Uninstall -AppName 'Dell Optimizer' -NoRestart @whatIfParam
 
 Write-Host "`n=== REMOVENDO APLICATIVOS WINDOWS DESNECESSARIOS ===" -ForegroundColor Yellow
 
+# Apps de jogos e entretenimento
 Remove-AppxPackageEverywhere 'Microsoft.GamingApp' @whatIfParam
+Remove-AppxPackageEverywhere 'Microsoft.Xbox*' @whatIfParam
+Remove-AppxPackageEverywhere 'Microsoft.MicrosoftSolitaireCollection' @whatIfParam
+Remove-AppxPackageEverywhere 'Microsoft.ZuneMusic' @whatIfParam
+Remove-AppxPackageEverywhere 'Microsoft.ZuneVideo' @whatIfParam
+
+# Apps de comunicação
+Remove-AppxPackageEverywhere 'Microsoft.SkypeApp' @whatIfParam
+Remove-AppxPackageEverywhere 'Microsoft.Messaging' @whatIfParam
+Remove-AppxPackageEverywhere 'Microsoft.YourPhone' @whatIfParam
+
+# Apps do Office e produtividade
 Remove-AppxPackageEverywhere 'Microsoft.MicrosoftOfficeHub' @whatIfParam
-Remove-AppxPackageEverywhere 'DellInc.DellDigitalDelivery' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.GetHelp' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.Getstarted' @whatIfParam
-Remove-AppxPackageEverywhere 'Microsoft.Messaging' @whatIfParam
-Remove-AppxPackageEverywhere 'Microsoft.MicrosoftSolitaireCollection' @whatIfParam
+Remove-AppxPackageEverywhere 'Microsoft.People' @whatIfParam
+Remove-AppxPackageEverywhere 'Microsoft.Bing*' @whatIfParam
+
+# Apps desnecessários diversos
 Remove-AppxPackageEverywhere 'Microsoft.OneConnect' @whatIfParam
-Remove-AppxPackageEverywhere 'Microsoft.SkypeApp' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.Wallet' @whatIfParam
 Remove-AppxPackageEverywhere 'microsoft.windowscommunicationsapps' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.WindowsFeedbackHub' @whatIfParam
-Remove-AppxPackageEverywhere 'Microsoft.YourPhone' @whatIfParam
-Remove-AppxPackageEverywhere 'ZuneMusic' @whatIfParam
+Remove-AppxPackageEverywhere 'Microsoft.Paint' @whatIfParam
+Remove-AppxPackageEverywhere 'Microsoft.WindowsMaps' @whatIfParam
+Remove-AppxPackageEverywhere 'Microsoft.WindowsCamera' @whatIfParam
+Remove-AppxPackageEverywhere 'Microsoft.ScreenSketch' @whatIfParam
+Remove-AppxPackageEverywhere 'Microsoft.StickyNotes' @whatIfParam
+Remove-AppxPackageEverywhere 'Microsoft.MSPaint' @whatIfParam
+
+# Apps de notícias e clima
+Remove-AppxPackageEverywhere 'Microsoft.BingNews' @whatIfParam
+Remove-AppxPackageEverywhere 'Microsoft.BingWeather' @whatIfParam
+
+# Apps da Store desnecessários
+Remove-AppxPackageEverywhere 'Microsoft.WindowsStore' @whatIfParam
+Remove-AppxPackageEverywhere 'Microsoft.StorePurchaseApp' @whatIfParam
+
+# Apps de redes sociais
+Remove-AppxPackageEverywhere 'Facebook*' @whatIfParam
+Remove-AppxPackageEverywhere 'Twitter*' @whatIfParam
+Remove-AppxPackageEverywhere 'Instagram*' @whatIfParam
+
+# Apps Dell via Appx
+Remove-AppxPackageEverywhere 'DellInc.DellDigitalDelivery' @whatIfParam
+Remove-AppxPackageEverywhere 'DellInc.DellCustomerConnect' @whatIfParam
+Remove-AppxPackageEverywhere 'DellInc.DellPowerManager' @whatIfParam
+Remove-AppxPackageEverywhere 'DellInc.DellMobileConnect' @whatIfParam
+
+Write-Host "`n=== REMOVENDO PROGRAMAS ADICIONAIS VIA UNINSTALL ===" -ForegroundColor Yellow
+
+# Programas que podem estar instalados via instalador tradicional
+Invoke-Uninstall -AppName 'Microsoft OneDrive' -NoRestart @whatIfParam
+Invoke-Uninstall -AppName 'Spotify' -NoRestart @whatIfParam
+Invoke-Uninstall -AppName 'Netflix' -NoRestart @whatIfParam
+Invoke-Uninstall -AppName 'Disney+' -NoRestart @whatIfParam
+Invoke-Uninstall -AppName 'Prime Video' -NoRestart @whatIfParam
+Invoke-Uninstall -AppName 'TikTok' -NoRestart @whatIfParam
 
 Write-Host "`n=== VERIFICANDO ENTRADAS DELLOSD ===" -ForegroundColor Yellow
 Show-UninstallString 'DELLOSD'
 
-Write-Host "`nProcesso concluido!" -ForegroundColor Green
+Write-Host "`n=== VERIFICANDO ENTRADAS DE MCAPPEE ===" -ForegroundColor Yellow
+Show-UninstallString 'McAfee'
+
+Write-Host "`nProcesso concluído!" -ForegroundColor Green
 if ($whatIfParam.WhatIf) {
     Write-Host "Este foi um teste. Execute o script novamente e escolha 'N' para realmente desinstalar os aplicativos." -ForegroundColor Magenta
 }
+
+# Restaurar política de execução padrão se necessário
+Write-Host "`nConsideracoes finais:" -ForegroundColor Cyan
+Write-Host "- Alguns apps podem requerer reinicializacao para remocao completa" -ForegroundColor Yellow
+Write-Host "- Apps essenciais do sistema nao serao removidos" -ForegroundColor Yellow
+Write-Host "- Voce pode reinstalar apps da Microsoft Store se necessario" -ForegroundColor Yellow
