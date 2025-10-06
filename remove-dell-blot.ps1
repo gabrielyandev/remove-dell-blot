@@ -258,7 +258,7 @@ Show-UninstallString 'McAfee'
 Write-Host "`nProcesso concluido!" -ForegroundColor Green
 
 Write-Host "`nDESENVOLVIDO POR [GABRIEL YAN] gabrielyandev.com.br -- @gabrielyandev" -ForegroundColor Red
-if ($whatIfParam.WhatIf) {
+if ($whatIfParam.ContainsKey('WhatIf') -and $whatIfParam['WhatIf']) {
     Write-Host "Este foi um teste. Execute o script novamente e escolha 'N' para realmente desinstalar os aplicativos." -ForegroundColor Magenta
 }
 
