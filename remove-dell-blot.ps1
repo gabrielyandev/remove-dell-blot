@@ -215,7 +215,6 @@ Remove-AppxPackageEverywhere 'microsoft.windowscommunicationsapps' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.WindowsFeedbackHub' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.Paint' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.WindowsMaps' @whatIfParam
-Remove-AppxPackageEverywhere 'Microsoft.WindowsCamera' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.ScreenSketch' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.StickyNotes' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.MSPaint' @whatIfParam
@@ -223,10 +222,6 @@ Remove-AppxPackageEverywhere 'Microsoft.MSPaint' @whatIfParam
 # Apps de notícias e clima
 Remove-AppxPackageEverywhere 'Microsoft.BingNews' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.BingWeather' @whatIfParam
-
-# Apps da Store desnecessários
-Remove-AppxPackageEverywhere 'Microsoft.WindowsStore' @whatIfParam
-Remove-AppxPackageEverywhere 'Microsoft.StorePurchaseApp' @whatIfParam
 
 # Apps de redes sociais
 Remove-AppxPackageEverywhere 'Facebook*' @whatIfParam
@@ -256,6 +251,8 @@ Write-Host "`n=== VERIFICANDO ENTRADAS DE MCAPPEE ===" -ForegroundColor Yellow
 Show-UninstallString 'McAfee'
 
 Write-Host "`nProcesso concluido!" -ForegroundColor Green
+
+Write-Host "`nDESENVOLVIDO POR [GABRIEL YAN] gabrielyandev.com.br -- @gabrielyandev" -ForegroundColor Red
 if ($whatIfParam.WhatIf) {
     Write-Host "Este foi um teste. Execute o script novamente e escolha 'N' para realmente desinstalar os aplicativos." -ForegroundColor Magenta
 }
