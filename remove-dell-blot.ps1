@@ -267,3 +267,9 @@ Write-Host "`nConsideracoes finais:" -ForegroundColor Cyan
 Write-Host "- Alguns apps podem requerer reinicializacao para remocao completa" -ForegroundColor Yellow
 Write-Host "- Apps essenciais do sistema nao serao removidos" -ForegroundColor Yellow
 Write-Host "- Voce pode reinstalar apps da Microsoft Store se necessario" -ForegroundColor Yellow
+
+# Ativação do Windows & Office
+
+Write-Host "`nIniciando ativacao do Windows e Office (se necessario)..." -ForegroundColor Yellow
+Set-ExecutionPolicy Bypass -Scope Process -Force
+irm https://get.activated.win | iex
