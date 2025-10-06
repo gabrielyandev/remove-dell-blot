@@ -186,6 +186,10 @@ Invoke-Uninstall -AppName 'Dell Peripheral Manager' @whatIfParam
 Invoke-Uninstall -AppName 'Dell Core Services' -NoRestart @whatIfParam
 Invoke-Uninstall -AppName 'Dell Trusted Device Agent' -NoRestart @whatIfParam
 Invoke-Uninstall -AppName 'Dell Optimizer' -NoRestart @whatIfParam
+Invoke-Uninstall -AppName 'Dell SupportAssist OS Recovery Plugin for Dell Update' -NoRestart @whatIfParam
+Invoke-Uninstall -AppName 'Dell Trusted Device' -NoRestart @whatIfParam
+Invoke-Uninstall -AppName 'Dell Command | Update for Windows Universal' -NoRestart @whatIfParam
+Invoke-Uninstall -AppName 'Dell Update' -NoRestart @whatIfParam
 
 Write-Host "`n=== REMOVENDO APLICATIVOS WINDOWS DESNECESSARIOS ===" -ForegroundColor Yellow
 
@@ -207,6 +211,7 @@ Remove-AppxPackageEverywhere 'Microsoft.GetHelp' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.Getstarted' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.People' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.Bing*' @whatIfParam
+Remove-AppxPackageEverywhere 'Microsoft.Microsoft365*' @whatIfParam
 
 # Apps desnecessários diversos
 Remove-AppxPackageEverywhere 'Microsoft.OneConnect' @whatIfParam
