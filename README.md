@@ -275,7 +275,7 @@ Após testar, execute novamente e selecione:
 
 ---
 
-**DESENVOLVIDO POR [GABRIEL YAN](https://gabrielyandev.com.br) — [@gabrielyandev](https://twitter.com/gabrielyandev)**
+**DESENVOLVIDO POR [GABRIEL YAN](https://gabrielyandev.com.br) — [@gabrielyandev](https://instagram.com/gabrielyandev)**
 
 ```
 
