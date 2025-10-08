@@ -1,3 +1,6 @@
+# Descrição: Script para remover bloatware Dell e aplicativos Windows desnecessários
+# Autor: Gabriel Yan - gabrielyandev.com.br -- @gabrielyande
+
 Set-ExecutionPolicy Bypass -Scope Process -Force
 
 #Requires -RunAsAdministrator
@@ -205,13 +208,31 @@ Remove-AppxPackageEverywhere 'Microsoft.SkypeApp' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.Messaging' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.YourPhone' @whatIfParam
 
-# Apps do Office e produtividade
+# Apps do Office e produtividade - ATUALIZADO
 Remove-AppxPackageEverywhere 'Microsoft.MicrosoftOfficeHub' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.GetHelp' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.Getstarted' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.People' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.Bing*' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.Microsoft365*' @whatIfParam
+
+# Microsoft 365 em diferentes idiomas
+Invoke-Uninstall -AppName 'Microsoft 365 - en-us' -NoRestart @whatIfParam
+Invoke-Uninstall -AppName 'Microsoft 365 - es-es' -NoRestart @whatIfParam
+Invoke-Uninstall -AppName 'Microsoft 365 - fr-fr' -NoRestart @whatIfParam
+Invoke-Uninstall -AppName 'Microsoft 365 - *' -NoRestart @whatIfParam
+
+# Microsoft OneNote em diferentes idiomas
+Invoke-Uninstall -AppName 'Microsoft OneNote - en-us' -NoRestart @whatIfParam
+Invoke-Uninstall -AppName 'Microsoft OneNote - es-es' -NoRestart @whatIfParam
+Invoke-Uninstall -AppName 'Microsoft OneNote - fr-fr' -NoRestart @whatIfParam
+Invoke-Uninstall -AppName 'Microsoft OneNote - pt-br' -NoRestart @whatIfParam
+Invoke-Uninstall -AppName 'Microsoft OneNote - *' -NoRestart @whatIfParam
+
+# Outros aplicativos do Office
+Invoke-Uninstall -AppName 'Microsoft Office*' -NoRestart @whatIfParam
+Invoke-Uninstall -AppName 'Office 16*' -NoRestart @whatIfParam
+Invoke-Uninstall -AppName 'Office 15*' -NoRestart @whatIfParam
 
 # Apps desnecessários diversos
 Remove-AppxPackageEverywhere 'Microsoft.OneConnect' @whatIfParam
@@ -254,6 +275,12 @@ Show-UninstallString 'DELLOSD'
 
 Write-Host "`n=== VERIFICANDO ENTRADAS DE MCAPPEE ===" -ForegroundColor Yellow
 Show-UninstallString 'McAfee'
+
+Write-Host "`n=== VERIFICANDO ENTRADAS DO MICROSOFT 365 ===" -ForegroundColor Yellow
+Show-UninstallString 'Microsoft 365'
+
+Write-Host "`n=== VERIFICANDO ENTRADAS DO MICROSOFT ONENOTE ===" -ForegroundColor Yellow
+Show-UninstallString 'Microsoft OneNote'
 
 Write-Host "`nProcesso concluido!" -ForegroundColor Green
 
