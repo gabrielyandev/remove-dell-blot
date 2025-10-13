@@ -214,13 +214,11 @@ Remove-AppxPackageEverywhere 'Microsoft.GetHelp' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.Getstarted' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.People' @whatIfParam
 Remove-AppxPackageEverywhere 'Microsoft.Bing*' @whatIfParam
-Remove-AppxPackageEverywhere 'Microsoft.Microsoft365*' @whatIfParam
 
 # Microsoft 365 em diferentes idiomas
 Invoke-Uninstall -AppName 'Microsoft 365 - en-us' -NoRestart @whatIfParam
 Invoke-Uninstall -AppName 'Microsoft 365 - es-es' -NoRestart @whatIfParam
 Invoke-Uninstall -AppName 'Microsoft 365 - fr-fr' -NoRestart @whatIfParam
-Invoke-Uninstall -AppName 'Microsoft 365 - *' -NoRestart @whatIfParam
 
 # Microsoft OneNote em diferentes idiomas
 Invoke-Uninstall -AppName 'Microsoft OneNote - en-us' -NoRestart @whatIfParam
